@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>NSCameraUsageDescription</key>
+    <string>Ilova profil rasmini suratga olish uchun kameradan foydalanishga ruxsat so'raydi.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Ilova galereyadan rasm tanlash uchun ruxsat so'raydi.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Ilova mikrofondan foydalanishga ruxsat so'raydi (agar video olinsa kerak bo'ladi).</string>
     <key>LSApplicationQueriesSchemes</key>
     <array><string>tel</string></array>
 	<key>CFBundleDevelopmentRegion</key>
