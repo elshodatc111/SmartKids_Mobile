@@ -40,7 +40,10 @@ class GroupController extends GetxController {
         filteredGroups.value = data['groups'] ?? [];
       }
     } catch (e) {
-      Get.snackbar("Xatolik", "Server bilan aloqa uzildi");
+      Get.snackbar(
+          box.read('lang') == 'uz' ? "Xatolik" : "Ошибка",
+          box.read('lang') == 'uz' ? "Server bilan aloqa uzildi" : "Связь с сервером прервана"
+      );
     } finally {
       isLoading.value = false;
     }
@@ -60,6 +63,7 @@ class GroupController extends GetxController {
   Future<void> createGroup(String name, String desc, String amount) async {
     isCreating.value = true;
     String? token = box.read('token');
+    final lang = box.read('lang') ?? 'uz';
     try {
       final response = await http.post(
         Uri.parse('${ApiConst.apiUrl}/group/create'),
@@ -79,15 +83,18 @@ class GroupController extends GetxController {
         Get.back();
         fetchGroups();
         Get.snackbar(
-          box.read('lang') == 'uz' ? "Muvaffaqiyatli" : "Успешно",
-          box.read('lang') == 'uz' ? "Guruh yaratildi" : "Группа создана",
+          lang == 'uz' ? "Muvaffaqiyatli" : "Успешно",
+          lang == 'uz' ? "Guruh yaratildi" : "Группа создана",
           backgroundColor: Colors.green.shade600,
           colorText: Colors.white,
           icon: const Icon(Icons.check_circle, color: Colors.white),
         );
       }
     } catch (e) {
-      Get.snackbar("Xatolik", "Ma'lumot yuborishda xatolik");
+      Get.snackbar(
+          lang == 'uz' ? "Xatolik" : "Ошибка",
+          lang == 'uz' ? "Ma'lumot yuborishda xatolik" : "Ошибка при отправке данных"
+      );
     } finally {
       isCreating.value = false;
     }
@@ -153,7 +160,6 @@ class GroupPage extends StatelessWidget {
     );
   }
 
-  // 1. Yangilangan Qidiruv maydoni (Aktiv bo'lmaganda ham border bor)
   Widget _buildSearchBox(GroupController controller, String lang) {
     return Container(
       color: Colors.white,
@@ -167,12 +173,10 @@ class GroupPage extends StatelessWidget {
           prefixIcon: const Icon(Icons.search_rounded, color: Colors.blueGrey, size: 20),
           filled: true,
           fillColor: const Color(0xFFF8FAFC),
-          // Aktiv bo'lmagandagi chegara
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(14),
             borderSide: BorderSide(color: Colors.grey.shade300, width: 1),
           ),
-          // Fokuslangandagi (bosilgandagi) chegara
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(14),
             borderSide: const BorderSide(color: Colors.blue, width: 1.5),
@@ -245,9 +249,9 @@ class GroupPage extends StatelessWidget {
                           const SizedBox(width: 12),
                           _statsChip(Icons.school_rounded, "${group['count_users']}", Colors.indigo.shade400),
                           const Spacer(),
-                          const Text(
-                            "Batafsil",
-                            style: TextStyle(color: Colors.blue, fontSize: 13, fontWeight: FontWeight.w500),
+                          Text(
+                            lang == 'uz' ? "Batafsil" : "Подробнее",
+                            style: const TextStyle(color: Colors.blue, fontSize: 13, fontWeight: FontWeight.w500),
                           ),
                           const Icon(Icons.chevron_right_rounded, color: Colors.blue, size: 18),
                         ],
@@ -323,11 +327,31 @@ class GroupPage extends StatelessWidget {
               children: [
                 Center(child: Container(width: 45, height: 4, decoration: BoxDecoration(color: Colors.grey.shade200, borderRadius: BorderRadius.circular(10)))),
                 const SizedBox(height: 20),
-                Text(lang == 'uz' ? "Yangi guruh" : "Новая группа", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                Text(
+                    lang == 'uz' ? "Yangi guruh yaratish" : "Создание новой группы",
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)
+                ),
                 const SizedBox(height: 20),
-                _modernInput(nameC, lang == 'uz' ? "Guruh nomi" : "Название", Icons.label_important_outline),
-                _modernInput(descC, lang == 'uz' ? "Qisqacha tavsif" : "Описание", Icons.notes_rounded, lines: 2),
-                _modernInput(amountC, lang == 'uz' ? "Oylik to'lov summasi" : "Сумма оплаты", Icons.payments_outlined, type: TextInputType.number),
+                _modernInput(
+                    nameC,
+                    lang == 'uz' ? "Guruh nomi" : "Название группы",
+                    Icons.label_important_outline,
+                    lang
+                ),
+                _modernInput(
+                    descC,
+                    lang == 'uz' ? "Tavsif" : "Описание",
+                    Icons.notes_rounded,
+                    lang,
+                    lines: 2
+                ),
+                _modernInput(
+                    amountC,
+                    lang == 'uz' ? "Oylik to'lov summasi" : "Сумма ежемесячной оплаты",
+                    Icons.payments_outlined,
+                    lang,
+                    type: TextInputType.number
+                ),
                 const SizedBox(height: 24),
                 Obx(() => controller.isCreating.value
                     ? const Center(child: SpinKitThreeBounce(color: Colors.blue, size: 30))
@@ -344,7 +368,10 @@ class GroupPage extends StatelessWidget {
                       controller.createGroup(nameC.text, descC.text, amountC.text);
                     }
                   },
-                  child: Text(lang == 'uz' ? "Saqlash" : "Сохранить", style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  child: Text(
+                      lang == 'uz' ? "Saqlash" : "Сохранить",
+                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)
+                  ),
                 )),
                 const SizedBox(height: 12),
               ],
@@ -355,8 +382,7 @@ class GroupPage extends StatelessWidget {
     );
   }
 
-  // 2. Yangilangan Inputlar (Enabled border qo'shildi)
-  Widget _modernInput(TextEditingController c, String l, IconData icon, {TextInputType type = TextInputType.text, int lines = 1}) {
+  Widget _modernInput(TextEditingController c, String l, IconData icon, String lang, {TextInputType type = TextInputType.text, int lines = 1}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: TextFormField(
@@ -368,17 +394,14 @@ class GroupPage extends StatelessWidget {
           prefixIcon: Icon(icon, size: 20, color: Colors.blue.shade400),
           filled: true,
           fillColor: const Color(0xFFF8FAFC),
-          // Aktiv bo'lmaganda
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide(color: Colors.grey.shade300),
           ),
-          // Bosilganda
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: const BorderSide(color: Colors.blue, width: 1.5),
           ),
-          // Xato bo'lganda
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: const BorderSide(color: Colors.red, width: 1),
@@ -388,7 +411,7 @@ class GroupPage extends StatelessWidget {
             borderSide: const BorderSide(color: Colors.red, width: 1.5),
           ),
         ),
-        validator: (v) => v!.isEmpty ? "!" : null,
+        validator: (v) => v!.isEmpty ? (lang == 'uz' ? "Maydonni to'ldiring" : "Заполните поле") : null,
       ),
     );
   }

@@ -40,7 +40,7 @@ class MenuConst {
       'title_ru': 'Посещаемость групп',
       'icon': Icons.how_to_reg_rounded,
       'color': Color(0xFF00BCD4),
-      'roles': ['admin','manager','tarbiyachi','oshpaz','hodim'],
+      'roles': ['admin','manager','tarbiyachi'],
       'page': ChildDavomadPage(),
     },
     {
@@ -88,7 +88,7 @@ class MenuConst {
       'title_ru': 'Мои выплаты зарплаты',
       'icon': Icons.payments_rounded,
       'color': Color(0xFF009688),
-      'roles': ['admin','manager','tarbiyachi','oshpaz','hodim'],
+      'roles': ['manager','tarbiyachi','oshpaz','hodim'],
       'page': MyGroupPage(),
     },
   ];
