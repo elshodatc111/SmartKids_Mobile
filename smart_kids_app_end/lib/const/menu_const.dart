@@ -7,10 +7,19 @@ import 'package:smart_kids_app_end/screen/group/group_page.dart';
 import 'package:smart_kids_app_end/screen/kassa/kassa_page.dart';
 import 'package:smart_kids_app_end/screen/moliya/moliya_page.dart';
 import 'package:smart_kids_app_end/screen/my_groups/my_group_page.dart';
+import 'package:smart_kids_app_end/screen/tkun/tugilgan_kun_page.dart';
 import 'package:smart_kids_app_end/screen/xodim/xodim_page.dart';
 
 class MenuConst {
   static const List<Map<String, dynamic>> items = [  //
+    {
+      'title_uz': 'Tug\'ilgan kunlar',
+      'title_ru': 'Дни рождения',
+      'icon': Icons.card_giftcard_rounded,
+      'color': Color(0xFFEC4899),
+      'roles': ['admin', 'manager', 'tarbiyachi', 'oshpaz', 'hodim'],
+      'page': TugilganKunPage(),
+    },
     {
       'title_uz': 'Bolalar',
       'title_ru': 'Дети',

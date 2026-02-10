@@ -32,11 +32,6 @@ class MainPage extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 0.8),
         ),
         actions: [
-          IconButton(
-            onPressed: () => Get.to(() => const TugilganKunPage()),
-            icon: const Icon(Icons.celebration_outlined, color: Colors.orangeAccent, size: 26),
-            tooltip: lang == 'uz' ? "Tug'ilgan kunlar" : 'Дни рождения',
-          ),
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
