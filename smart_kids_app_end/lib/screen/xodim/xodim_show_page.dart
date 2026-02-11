@@ -52,14 +52,14 @@ class _XodimShowPageState extends State<XodimShowPage> {
     try {
       final response = await http
           .get(
-            Uri.parse('${ApiConst.apiUrl}/emploes/show/${widget.id}'),
+            Uri.parse('${ApiConst.apiUrl}/emploes/shows/${widget.id}'),
             headers: {
               'Authorization': 'Bearer $token',
               'Accept': 'application/json',
             },
           )
           .timeout(const Duration(seconds: 15));
-
+      print(response.statusCode);
       if (response.statusCode == 200) {
         var decoded = jsonDecode(response.body);
         if (decoded['status'] == true) {
@@ -159,7 +159,7 @@ class _XodimShowPageState extends State<XodimShowPage> {
           lang == 'uz' ? "Parol yangilandi" : "Пароль обновлен",
           backgroundColor: Colors.green,
           colorText: Colors.white,
-          snackPosition: SnackPosition.BOTTOM,
+          snackPosition: SnackPosition.TOP,
           margin: const EdgeInsets.all(15),
         );
       }
@@ -188,26 +188,8 @@ class _XodimShowPageState extends State<XodimShowPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF1F5F9),
       appBar: AppBar(
-        title: Text(
-          isLoading
-              ? (lang == 'uz' ? "Yuklanmoqda..." : "Загрузка...")
-              : (lang == 'uz' ? "Xodim profili" : "Профиль сотрудника"),
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w800,
-            color: Color(0xFF1E293B),
-          ),
-        ),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.white,
-        foregroundColor: const Color(0xFF1E293B),
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
-        ),
+        title: Text(" "),
         actions: [
           IconButton(
             onPressed: fetchUserInfo,

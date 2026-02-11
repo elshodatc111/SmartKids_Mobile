@@ -148,27 +148,8 @@ class MoliyaPage extends StatelessWidget {
     final f = NumberFormat("#,###", "uz_UZ");
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF1F5F9),
       appBar: AppBar(
-        title: Text(
-          c.lang == 'uz' ? "Moliya" : "Финансы",
-          style: const TextStyle(
-            fontWeight: FontWeight.w800,
-            fontSize: 18,
-            color: Color(0xFF1E293B),
-          ),
-        ),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: const Icon(
-            Icons.arrow_back_ios_new_rounded,
-            size: 20,
-            color: Color(0xFF1E293B),
-          ),
-        ),
+        title: Text(c.lang == 'uz' ? "Moliya" : "Финансы"),
         actions: [
           IconButton(
             onPressed: c.fetchFinance,
