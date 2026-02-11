@@ -129,13 +129,12 @@ class ChildPage extends StatelessWidget {
     final lang = GetStorage().read('lang') ?? 'uz';
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F7F9),
       appBar: AppBar(
         title: Text(lang == 'uz' ? "Bolalar" : "Дети"),
         actions: [
           IconButton(
             onPressed: () => _showAddKidModal(context, controller, lang),
-            icon: const Icon(Icons.person_add_alt_1_rounded, color: Colors.blue, size: 28),
+            icon: const Icon(Icons.person_add_alt_1_rounded, color: Colors.blue, size: 20),
           )
         ],
       ),
