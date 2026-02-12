@@ -37,14 +37,6 @@ class MenuConst {
       'page': GroupPage(),
     },
     {
-      'title_uz': 'Xodimlar davomati',
-      'title_ru': 'Посещаемость сотрудников',
-      'icon': Icons.assignment_ind_rounded,
-      'color': Color(0xFF673AB7), // Siyohrang
-      'roles': ['admin','manager'],
-      'page': HodimDavomadPage(),
-    },
-    {
       'title_uz': 'Guruhlar davomati',
       'title_ru': 'Посещаемость групп',
       'icon': Icons.how_to_reg_rounded,
@@ -69,6 +61,14 @@ class MenuConst {
       'page': XodimPage(),
     },
     {
+      'title_uz': 'Xodimlar davomati',
+      'title_ru': 'Посещаемость сотрудников',
+      'icon': Icons.assignment_ind_rounded,
+      'color': Color(0xFF673AB7), // Siyohrang
+      'roles': ['admin','manager'],
+      'page': HodimDavomadPage(),
+    },
+    {
       'title_uz': 'Moliya',
       'title_ru': 'Финансы',
       'icon': Icons.monetization_on_rounded,
@@ -77,8 +77,8 @@ class MenuConst {
       'page': MoliyaPage(),
     },
     {
-      'title_uz': 'Statistika',
-      'title_ru': 'Статистика',
+      'title_uz': 'Moliya dashboardi',
+      'title_ru': 'Финансовый дашборд',
       'icon': Icons.bar_chart_rounded,
       'color': Color(0xFF607D8B),
       'roles': ['admin'],
