@@ -50,7 +50,7 @@ class MenuConst {
       'icon': Icons.how_to_reg_rounded,
       'color': Color(0xFF00BCD4),
       'roles': ['admin','manager','tarbiyachi'],
-      'page': ChildDavomadPage(),
+      'page': ChildDavomatPage(),
     },
     {
       'title_uz': 'Kassa',
