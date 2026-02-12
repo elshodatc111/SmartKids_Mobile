@@ -7,6 +7,7 @@ import 'package:smart_kids_app_end/screen/group/group_page.dart';
 import 'package:smart_kids_app_end/screen/kassa/kassa_page.dart';
 import 'package:smart_kids_app_end/screen/moliya/moliya_page.dart';
 import 'package:smart_kids_app_end/screen/my_groups/my_group_page.dart';
+import 'package:smart_kids_app_end/screen/my_payment/my_payment.dart';
 import 'package:smart_kids_app_end/screen/tkun/tugilgan_kun_page.dart';
 import 'package:smart_kids_app_end/screen/xodim/xodim_page.dart';
 
@@ -98,7 +99,7 @@ class MenuConst {
       'icon': Icons.payments_rounded,
       'color': Color(0xFF009688),
       'roles': ['manager','tarbiyachi','oshpaz','hodim'],
-      'page': MyGroupPage(),
+      'page': MyPayment(),
     },
   ];
 }
