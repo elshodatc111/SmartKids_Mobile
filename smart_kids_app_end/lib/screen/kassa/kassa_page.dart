@@ -250,7 +250,7 @@ class KassaPage extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               InkWell(
-                onTap: ()=>Get.to(() => KassaPeddingPayment()),
+                onTap: ()=>Get.to(() => KassaPendingPayment()),
                 child: _clickButton(
                   lang == 'uz'
                       ? "Tasdiqlanmagan to\'lovlar"
