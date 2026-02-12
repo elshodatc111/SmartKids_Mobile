@@ -6,6 +6,8 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
 import 'package:smart_kids_app_end/const/api_const.dart';
+import 'package:smart_kids_app_end/screen/kassa/kassa_pedding_payment.dart';
+import 'package:smart_kids_app_end/screen/kassa/kassa_return_payment.dart';
 
 // --- CONTROLLER ---
 class KassaController extends GetxController {
@@ -160,8 +162,18 @@ class KassaPage extends StatelessWidget {
         }
         final data = controller.kassaData;
         final balance = data['balance'] ?? {"cash": 0, "card": 0, "bank": 0};
-        final out =data['out'] ??{"total": {"cash": 0, "card": 0, "bank": 0},"items": {},};
-        final cost =data['cost'] ??{"total": {"cash": 0, "card": 0, "bank": 0},"items": {},};
+        final out =
+            data['out'] ??
+            {
+              "total": {"cash": 0, "card": 0, "bank": 0},
+              "items": {},
+            };
+        final cost =
+            data['cost'] ??
+            {
+              "total": {"cash": 0, "card": 0, "bank": 0},
+              "items": {},
+            };
         return RefreshIndicator(
           onRefresh: () => controller.fetchKassa(),
           child: ListView(
@@ -169,31 +181,121 @@ class KassaPage extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  _balanceCard("Naqd","Наличные",balance['cash'],Colors.green,Icons.payments_outlined,f,lang,),
+                  _balanceCard(
+                    "Naqd",
+                    "Наличные",
+                    balance['cash'],
+                    Colors.green,
+                    Icons.payments_outlined,
+                    f,
+                    lang,
+                  ),
                   const SizedBox(width: 8),
-                  _balanceCard("Plastik","Карта",balance['card'],Colors.blue,Icons.credit_card_outlined,f,lang,),
+                  _balanceCard(
+                    "Plastik",
+                    "Карта",
+                    balance['card'],
+                    Colors.blue,
+                    Icons.credit_card_outlined,
+                    f,
+                    lang,
+                  ),
                   const SizedBox(width: 8),
-                  _balanceCard("Bank","Банк",balance['bank'],Colors.orange,Icons.account_balance_outlined,f,lang,),
+                  _balanceCard(
+                    "Bank",
+                    "Банк",
+                    balance['bank'],
+                    Colors.orange,
+                    Icons.account_balance_outlined,
+                    f,
+                    lang,
+                  ),
                 ],
               ),
               const SizedBox(height: 12),
-              _totalInfoCard(lang,out['total'],Colors.redAccent,f,lang == 'uz' ? "Tasdiqlanmagan chiqimlar" : "Неподтвержденный результат",() => _showDetails(
-                  context,controller,'out',lang == 'uz' ? "Tasdiqlanmagan chiqimlar" : "Неподтвержденный результат",
+              _totalInfoCard(
+                lang,
+                out['total'],
+                Colors.redAccent,
+                f,
+                lang == 'uz'
+                    ? "Tasdiqlanmagan chiqimlar"
+                    : "Неподтвержденный результат",
+                () => _showDetails(
+                  context,
+                  controller,
+                  'out',
+                  lang == 'uz'
+                      ? "Tasdiqlanmagan chiqimlar"
+                      : "Неподтвержденный результат",
                 ),
               ),
               const SizedBox(height: 12),
-              _totalInfoCard(lang,cost['total'],Colors.purple,f,
-                lang == 'uz' ? "Tasdiqlanmagan xarajatlar" : "Неутвержденные расходы",
-                () => _showDetails(context,
+              _totalInfoCard(
+                lang,
+                cost['total'],
+                Colors.purple,
+                f,
+                lang == 'uz'
+                    ? "Tasdiqlanmagan xarajatlar"
+                    : "Неутвержденные расходы",
+                () => _showDetails(
+                  context,
                   controller,
                   'cost',
-                  lang == 'uz' ? "Tasdiqlanmagan xarajatlar" : "Неутвержденные расходы",
+                  lang == 'uz'
+                      ? "Tasdiqlanmagan xarajatlar"
+                      : "Неутвержденные расходы",
+                ),
+              ),
+              const SizedBox(height: 12),
+              InkWell(
+                onTap: ()=>Get.to(() => KassaPeddingPayment()),
+                child: _clickButton(
+                  lang == 'uz'
+                      ? "Tasdiqlanmagan to\'lovlar"
+                      : "Неподтвержденные платежи",
+                ),
+              ),
+              const SizedBox(height: 12),
+              InkWell(
+                onTap: ()=>Get.to(() => KassaReturnPayment()),
+                child: _clickButton(
+                  lang == 'uz' ? "Qaytarilgan to\'lovlar" : "Возврат средств",
                 ),
               ),
             ],
           ),
         );
       }),
+    );
+  }
+
+  Widget _clickButton(String title) {
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.grey.shade100),
+        boxShadow: [
+          BoxShadow(color: Colors.black.withOpacity(0.01), blurRadius: 10),
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF475569),
+            ),
+          ),
+          Icon(Icons.chevron_right, size: 18, color: Colors.grey.shade400),
+        ],
+      ),
     );
   }
 
