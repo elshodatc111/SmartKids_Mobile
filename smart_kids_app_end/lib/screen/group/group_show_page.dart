@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
 import 'package:smart_kids_app_end/screen/group/group_show_controller.dart';
-import 'package:smart_kids_app_end/screen/group/group_show_davomad.dart';
+import 'package:smart_kids_app_end/screen/my_groups/my_group_davomad_history_page.dart';
 
 class GroupShowPage extends StatelessWidget {
   final int id;
@@ -110,7 +110,7 @@ class GroupShowPage extends StatelessWidget {
           _showHistoryModal(context, controller, false, lang);
         }),
         _menuBtn(Icons.assignment_turned_in_rounded, lang == 'uz' ? "Guruh davomadi" : "Посещаемость группы", Colors.orange, () {
-          Get.to(() => GroupShowDavomad(group_id: id));
+          Get.to(() => MyGroupDavomadHistoryPage(id: id,));
         }),
       ],
     );
