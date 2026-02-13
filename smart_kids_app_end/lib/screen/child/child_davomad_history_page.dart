@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:smart_kids_app_end/const/api_const.dart';
 
 class ChildDavomadHistoryPage extends StatefulWidget {
   final int id; // Bu kidId
@@ -61,7 +62,7 @@ class _ChildDavomadHistoryPageState extends State<ChildDavomadHistoryPage> {
 
   Future<void> _fetchHistory() async {
     final token = _storage.read('token');
-    final url = 'https://atko.tech/smart_kids_app_api/public/api/kid/kid/davomad/show/${widget.id}';
+    final url = '${ApiConst.apiUrl}/kid/kid/davomad/show/${widget.id}';
 
     try {
       final response = await http.get(
