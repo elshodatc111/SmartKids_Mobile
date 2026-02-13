@@ -98,7 +98,7 @@ class MenuConst {
       'title_ru': 'Мои выплаты зарплаты',
       'icon': Icons.payments_rounded,
       'color': Color(0xFF009688),
-      'roles': ['manager','tarbiyachi','oshpaz','hodim','admin'],
+      'roles': ['manager','tarbiyachi','oshpaz','hodim'],
       'page': MyPayment(),
     },
   ];
