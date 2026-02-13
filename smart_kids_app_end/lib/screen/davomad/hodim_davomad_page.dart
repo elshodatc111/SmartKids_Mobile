@@ -116,7 +116,7 @@ class HodimDavomadPage extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(controller.t("Davomat tahlili", "Анализ посещаемости")),
+          title: Text(controller.t("Xodimlar davomat tahlili", "Анализ посещаемости")),
           actions: [
             IconButton(
               icon: const Icon(

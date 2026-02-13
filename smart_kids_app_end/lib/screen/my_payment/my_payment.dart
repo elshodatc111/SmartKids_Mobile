@@ -20,7 +20,6 @@ class _MyPaymentState extends State<MyPayment> {
   List<dynamic> _payments = [];
   late String currentLang;
 
-  // Lug'at
   final Map<String, Map<String, String>> _words = {
     'uz': {
       'title': 'Ish haqi tarixi',
