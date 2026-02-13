@@ -100,20 +100,11 @@ class _MyGroupShowPageState extends State<MyGroupShowPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black, size: 20),
-          onPressed: () => Get.back(),
-        ),
         title: Obx(() => Text(
           controller.isLoading.value
               ? controller.t("Yuklanmoqda...", "Загрузка...")
               : controller.groupData['name']?.toString() ?? "",
-          style: const TextStyle(color: Color(0xFF1E293B), fontSize: 17, fontWeight: FontWeight.bold),
         )),
       ),
       body: Obx(() {
